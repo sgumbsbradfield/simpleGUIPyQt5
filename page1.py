@@ -42,11 +42,16 @@ class Page1(QWidget):
     def draw_random_ellipse(self):
         """Generate a random position for a new ellipse and trigger a repaint."""
         # Generate random position and size for the ellipse
+        red = random.randint(0, 255)
+        green = random.randint(0, 255)
+        blue = random.randint(0, 255)
+        colour = QColor(red, green, blue)
         ellipse = (
             random.randint(50, self.width() - 100),  # X-coordinate
             random.randint(50, self.height() - 100),  # Y-coordinate
             random.randint(50, 150),  # Width
-            random.randint(50, 150)  # Height
+            random.randint(50, 150), # Height
+            colour #Colour
         )
         self.ellipses.append(ellipse)  # Add the new ellipse to the list
         self.update()  # Trigger the paintEvent to redraw the widget
@@ -59,7 +64,6 @@ class Page1(QWidget):
     def mousePressEvent(self, event):
         """Draw an ellipse at the position where the mouse is clicked."""
         if event.button() == Qt.LeftButton:  # Only handle left mouse button clicks
-
             x = event.x() - random.randint(50, 150)  # Center the ellipse around the click
             y = event.y() - random.randint(50, 150)  # Center the ellipse around the click
             ellipse = (x, y, random.randint(50, 150), random.randint(50, 150))  # Fixed size of 50x50 for the ellipse
@@ -70,10 +74,11 @@ class Page1(QWidget):
         """Override paintEvent to draw all ellipses."""
         super(Page1, self).paintEvent(event)
         painter = QPainter(self)
-        painter.setBrush(QBrush(Qt.blue, Qt.SolidPattern))  # Set fill color
+
         painter.setPen(Qt.NoPen)  # Remove border
         for ellipse in self.ellipses:
-            x, y, w, h = ellipse
+            x, y, w, h, c = ellipse
+            painter.setBrush(QBrush(c, Qt.SolidPattern))  # Set fill color
             painter.drawEllipse(x, y, w, h)
 
     def go_to_home(self):
