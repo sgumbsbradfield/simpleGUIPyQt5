@@ -15,7 +15,7 @@ class MainWindow(QWidget):
         font.setPointSize(16)
 
         # Resize the window and set the title
-        self.resize(2000, 500)
+        self.resize(200, 500)
         self.setWindowTitle("PyQt5 - Main Window")
 
         # Create the layout
@@ -71,7 +71,7 @@ class MainWindow(QWidget):
 def main():
     app = QApplication(sys.argv)
     ex = MainWindow()
-    ex.show()
+    ex.showMaximized()
     sys.exit(app.exec_())
 
 if __name__ == '__main__':
