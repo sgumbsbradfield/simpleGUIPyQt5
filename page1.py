@@ -66,7 +66,11 @@ class Page1(QWidget):
         if event.button() == Qt.LeftButton:  # Only handle left mouse button clicks
             x = event.x() - random.randint(50, 150)  # Center the ellipse around the click
             y = event.y() - random.randint(50, 150)  # Center the ellipse around the click
-            ellipse = (x, y, random.randint(50, 150), random.randint(50, 150))  # Fixed size of 50x50 for the ellipse
+            red = random.randint(0, 255)
+            green = random.randint(0, 255)
+            blue = random.randint(0, 255)
+            colour = QColor(red, green, blue)
+            ellipse = (x, y, random.randint(50, 150), random.randint(50, 150), colour)  # Fixed size of 50x50 for the ellipse
             self.ellipses.append(ellipse)
             self.update()  # Trigger a repaint
 
